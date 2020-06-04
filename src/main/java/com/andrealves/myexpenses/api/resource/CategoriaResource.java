@@ -18,7 +18,6 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.andrealves.myexpenses.api.model.Categoria;
 import com.andrealves.myexpenses.api.repository.CategoriaRepository;
-import com.andrealves.webservice.entities.User;
 
 @RestController
 @RequestMapping("/categorias")
@@ -49,8 +48,14 @@ public class CategoriaResource {
 	}
 	
 	@GetMapping(value = "/{codigo}")
-	public Optional<Categoria> buscarPeloCodig(@PathVariable Long codigo) {
-		return categoriaRepository.findById(codigo);
+	public ResponseEntity<Optional<Categoria>> buscarPeloCodigo(@PathVariable Long codigo) {
+		Optional<Categoria> categoria = categoriaRepository.findById(codigo);
+		
+		if(categoria.isPresent()) {
+			return ResponseEntity.ok(categoria);
+		}else {
+			return ResponseEntity.notFound().build();
+		}
 	}
 
 }
