@@ -47,6 +47,7 @@
 			<scope>runtime</scope>
 		</dependency>
 
+		<!-- Migracoes - Flyway -->
 		<dependency>
 			<groupId>org.flywaydb</groupId>
 			<artifactId>flyway-core</artifactId>

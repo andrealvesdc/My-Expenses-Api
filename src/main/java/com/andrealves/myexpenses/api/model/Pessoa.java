@@ -11,28 +11,28 @@ import javax.validation.constraints.NotNull;
 @Entity
 @Table(name = "pessoa")
 public class Pessoa {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long codigo;
-	
+
 	@NotNull
-	private String name;
-	
+	private String nome;
+
 	@Embedded
-	private Endereco endereço;
-	
+	private Endereco endereco;
+
 	@NotNull
 	private Boolean ativo;
 	
 	public Pessoa() {
 	}
-
-	public Pessoa(Long codigo, @NotNull String name, Endereco endereço, @NotNull Boolean ativo) {
+	
+	public Pessoa(Long codigo, @NotNull String nome, Endereco endereco, @NotNull Boolean ativo) {
 		super();
 		this.codigo = codigo;
-		this.name = name;
-		this.endereço = endereço;
+		this.nome = nome;
+		this.endereco = endereco;
 		this.ativo = ativo;
 	}
 
@@ -44,20 +44,20 @@ public class Pessoa {
 		this.codigo = codigo;
 	}
 
-	public String getName() {
-		return name;
+	public String getNome() {
+		return nome;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setNome(String nome) {
+		this.nome = nome;
 	}
 
-	public Endereco getEndereço() {
-		return endereço;
+	public Endereco getEndereco() {
+		return endereco;
 	}
 
-	public void setEndereço(Endereco endereço) {
-		this.endereço = endereço;
+	public void setEndereco(Endereco endereco) {
+		this.endereco = endereco;
 	}
 
 	public Boolean getAtivo() {
@@ -67,7 +67,7 @@ public class Pessoa {
 	public void setAtivo(Boolean ativo) {
 		this.ativo = ativo;
 	}
-	
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -92,5 +92,5 @@ public class Pessoa {
 			return false;
 		return true;
 	}
-
+	
 }
