@@ -24,32 +24,32 @@ import com.andrealves.myexpenses.api.repository.CategoriaRepository;
 @RestController
 @RequestMapping("/categorias")
 public class CategoriaResource {
-	
+
 	@Autowired
 	private CategoriaRepository categoriaRepository;
-	
+
 	private ApplicationEventPublisher publisher;
-	
+
 	@GetMapping
-	public List<Categoria> listar(){
+	public List<Categoria> listar() {
 		return categoriaRepository.findAll();
-	} 
-	
+	}
+
 	@PostMapping
 	public ResponseEntity<Categoria> criar(@Valid @RequestBody Categoria categoria, HttpServletResponse response) {
 		Categoria categoriaSalva = categoriaRepository.save(categoria);
 		publisher.publishEvent(new RecursoCriadoEvent(this, response, categoriaSalva.getCodigo()));
-		
+
 		return ResponseEntity.status(HttpStatus.CREATED).body(categoriaSalva);
 	}
-	
+
 	@GetMapping(value = "/{codigo}")
 	public ResponseEntity<Optional<Categoria>> buscarPeloCodigo(@PathVariable Long codigo) {
 		Optional<Categoria> categoria = categoriaRepository.findById(codigo);
-		
-		if(categoria.isPresent()) {
+
+		if (categoria.isPresent()) {
 			return ResponseEntity.ok(categoria);
-		}else {
+		} else {
 			return ResponseEntity.notFound().build();
 		}
 	}
